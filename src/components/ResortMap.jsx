@@ -16,7 +16,7 @@ function ResortDot({ resort, isSelected, isRegion, onToggle }) {
         color: '#FFFFFF',
         weight: 2,
       }}
-      eventHandlers={{ click: () => onToggle(resort.id) }}
+      eventHandlers={{}}
     >
       <Popup>
         <div style={{ fontFamily: "'DM Sans', sans-serif", minWidth: 180 }}>
