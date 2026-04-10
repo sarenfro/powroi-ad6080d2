@@ -392,11 +392,11 @@ export default function App() {
       {mustHaveNotice && (
         <div style={{
           marginBottom: 16,
-          padding: '12px 14px',
+          padding: '14px 16px',
           borderRadius: 10,
-          border: '1px solid var(--border)',
-          background: 'var(--accent-light)',
-          color: 'var(--text)',
+          border: 'none',
+          background: '#003366',
+          color: '#fff',
           fontSize: 14,
           fontWeight: 600,
         }}>
