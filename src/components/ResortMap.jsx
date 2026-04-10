@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaf
 import { PASSES } from '../data/resorts';
 
 function ResortDot({ resort, isSelected, isRegion, onToggle }) {
-  const color = isSelected ? '#003366' : isRegion ? '#CC5500' : '#228B22';
+  const color = isSelected ? '#CC5500' : isRegion ? '#228B22' : '#003366';
   const radius = isSelected ? 9 : isRegion ? 7 : 5;
 
   return (
@@ -131,13 +131,13 @@ export default function ResortMap({ resorts, selected, onToggle, region }) {
       }}>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#CC5500', display: 'inline-block' }} /> Your region
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#228B22', display: 'inline-block' }} /> Your region
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#228B22', display: 'inline-block' }} /> Other
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#003366', display: 'inline-block' }} /> Other
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#003366', display: 'inline-block' }} /> Pinned
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#CC5500', display: 'inline-block' }} /> Pinned
           </span>
         </div>
         <span>Click markers or search to pin must-haves (max 3)</span>
