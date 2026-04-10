@@ -38,7 +38,7 @@ function ResortDot({ resort, isSelected, isRegion, onToggle }) {
               fontFamily: "'DM Sans', sans-serif",
             }}
           >
-            {isSelected ? 'Unpin' : 'Pin as must-have'}
+            {isSelected ? 'Remove must-have' : 'Pin as must-have'}
           </button>
         </div>
       </Popup>
