@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaf
 import { PASSES } from '../data/resorts';
 
 function ResortDot({ resort, isSelected, isRegion, onToggle }) {
-  const color = isSelected ? '#1A1A1A' : isRegion ? '#555555' : '#D4CFC7';
+  const color = isSelected ? '#1A1A1A' : isRegion ? '#555555' : '#228B22';
   const radius = isSelected ? 9 : isRegion ? 7 : 5;
 
   return (
@@ -134,7 +134,7 @@ export default function ResortMap({ resorts, selected, onToggle, region }) {
             <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#555', display: 'inline-block' }} /> Your region
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#D4CFC7', display: 'inline-block' }} /> Other
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#228B22', display: 'inline-block' }} /> Other
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#1A1A1A', display: 'inline-block' }} /> Pinned
