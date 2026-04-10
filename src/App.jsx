@@ -261,17 +261,31 @@ export default function App() {
   const [expandedCard, setExpandedCard] = useState(null);
   const [viewMode, setViewMode] = useState('ranked');
   const [activeTab, setActiveTab] = useState('results');
+  const [mustHaveNotice, setMustHaveNotice] = useState('');
 
   const updatePref = (key, val) => setPrefs(p => ({ ...p, [key]: val }));
 
   const toggleMustHave = useCallback((id) => {
-    setPrefs(p => {
-      const c = p.mustHaveResorts;
-      if (c.includes(id)) return { ...p, mustHaveResorts: c.filter(r => r !== id) };
-      if (c.length >= 3) return p;
-      return { ...p, mustHaveResorts: [...c, id] };
-    });
-  }, []);
+    if (prefs.mustHaveResorts.includes(id)) {
+      setMustHaveNotice('');
+      setPrefs(p => ({
+        ...p,
+        mustHaveResorts: p.mustHaveResorts.filter(r => r !== id),
+      }));
+      return;
+    }
+
+    if (prefs.mustHaveResorts.length >= 3) {
+      setMustHaveNotice('You already selected 3 must-have resorts. Remove one before adding another.');
+      return;
+    }
+
+    setMustHaveNotice('');
+    setPrefs(p => ({
+      ...p,
+      mustHaveResorts: [...p.mustHaveResorts, id],
+    }));
+  }, [prefs.mustHaveResorts]);
 
   const results = useMemo(() => {
     let scored = PASSES.map(p => scorePass(p, prefs));
@@ -371,6 +385,21 @@ export default function App() {
         Select up to 3 resorts you need access to. These heavily weight the recommendation.
       </p>
 
+      {mustHaveNotice && (
+        <div style={{
+          marginBottom: 16,
+          padding: '12px 14px',
+          borderRadius: 10,
+          border: '1px solid var(--border)',
+          background: 'var(--accent-light)',
+          color: 'var(--text)',
+          fontSize: 14,
+          fontWeight: 600,
+        }}>
+          {mustHaveNotice}
+        </div>
+      )}
+
       <ResortMap resorts={RESORTS} selected={prefs.mustHaveResorts} onToggle={toggleMustHave} region={prefs.region} />
 
       {prefs.mustHaveResorts.length > 0 && (
@@ -380,10 +409,25 @@ export default function App() {
             return (
               <span key={id} style={{
                 fontSize: 13, background: 'var(--accent)', color: '#fff',
-                padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 6,
+                padding: '6px 10px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 8,
               }}>
                 {r?.name}
-                <span style={{ cursor: 'pointer', opacity: 0.7 }} onClick={() => toggleMustHave(id)}>×</span>
+                <button
+                  type="button"
+                  onClick={() => toggleMustHave(id)}
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.45)',
+                    background: 'transparent',
+                    color: '#fff',
+                    borderRadius: 999,
+                    padding: '2px 8px',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Remove
+                </button>
               </span>
             );
           })}
