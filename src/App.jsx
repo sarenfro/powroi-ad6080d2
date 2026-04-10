@@ -265,8 +265,12 @@ export default function App() {
 
   const updatePref = (key, val) => setPrefs(p => ({ ...p, [key]: val }));
 
+  const mustHaveRef = useRef(prefs.mustHaveResorts);
+  mustHaveRef.current = prefs.mustHaveResorts;
+
   const toggleMustHave = useCallback((id) => {
-    if (prefs.mustHaveResorts.includes(id)) {
+    const current = mustHaveRef.current;
+    if (current.includes(id)) {
       setMustHaveNotice('');
       setPrefs(p => ({
         ...p,
@@ -275,7 +279,7 @@ export default function App() {
       return;
     }
 
-    if (prefs.mustHaveResorts.length >= 3) {
+    if (current.length >= 3) {
       setMustHaveNotice('You already selected 3 must-have resorts. Remove one before adding another.');
       return;
     }
@@ -285,7 +289,7 @@ export default function App() {
       ...p,
       mustHaveResorts: [...p.mustHaveResorts, id],
     }));
-  }, [prefs.mustHaveResorts]);
+  }, []);
 
   const results = useMemo(() => {
     let scored = PASSES.map(p => scorePass(p, prefs));
